@@ -1,0 +1,79 @@
+/*
+AWS LAMDA CODE
+
+'use strict';
+var axios = require('axios');
+var LoginUser;
+
+// exports.handler = async (event) => {
+//     // TODO implement
+//     const response = {
+//         statusCode: 200,
+//         body: JSON.stringify('Hello from Lambda!'),
+//     };
+//     return response;
+// };
+
+
+
+  
+
+
+module.exports.LoginUser = async (event) => {
+  
+
+  var data = JSON.stringify({
+    "username": "Vishalvchavan7@gmail.com",
+    "password": "Vishal@1998",
+    "options": {
+      "multiOptionalFactorEnroll": true,
+      "warnBeforePasswordExpired": true
+    }
+  });
+  
+  
+var config = {
+  method: 'get',
+  url: 'https://c983-45-117-149-64.ngrok.io/posts/UserName?User_Name=Blessy',
+  headers: { }
+};
+
+  
+
+axios(config)
+  
+  try {
+    const response = await axios.get(config.url);
+    const data = response.data;
+    console.log(JSON.stringify(response.data));
+    var name = (JSON.stringify(response.data.User_Name));
+    return {"dialogAction": {
+      "type": "Close",
+      "fulfillmentState": "Fulfilled",
+      "message": {
+        "contentType": "PlainText",
+        "content": `Hello ${name}, You have been successfully logged in!`
+        
+      }
+}
+}
+}catch(error){
+  console.log(error);
+}
+}
+
+
+// Below is TEST JSON
+
+{
+  "dialogAction": {
+    "type": "ConfirmIntent"
+  },
+  "intent": {
+    "name": "LoginUser"
+  }
+}
+
+
+*/
+
